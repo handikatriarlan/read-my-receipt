@@ -27,7 +27,8 @@ class ExpensesTable
                 TextColumn::make('amount')
                     ->label('Total')
                     ->money('idr'),
-                ImageColumn::make('receipt_image'),
+                ImageColumn::make('receipt_image')
+                    ->disk('public'),
                 TextColumn::make('items_count')
                     ->counts('items')
                     ->label('Jumlah Item')

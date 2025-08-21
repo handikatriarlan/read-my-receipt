@@ -25,7 +25,7 @@ class ExpensesTable
                     ->date()
                     ->sortable(),
                 TextColumn::make('amount')
-                    ->label('total')
+                    ->label('Total')
                     ->money('idr'),
                 ImageColumn::make('receipt_image'),
                 TextColumn::make('items_count')

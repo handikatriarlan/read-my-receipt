@@ -27,7 +27,7 @@ class Helper
         }
     }
 
-    public function extarctSpecialFieldsAndCleanItems(array $items)
+    public function extractSpecialFieldsAndCleanItems(array $items)
     {
         $unwantedNames = ['subtotal', 'total', 'vat', 'kembalian'];
 

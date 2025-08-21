@@ -5,7 +5,6 @@ A Laravel-based receipt OCR (Optical Character Recognition) application that aut
 [![PHP Version](https://img.shields.io/badge/PHP-8.2+-blue.svg)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
 [![Filament](https://img.shields.io/badge/Filament-4.x-yellow.svg)](https://filamentphp.com)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## ✨ Features
 

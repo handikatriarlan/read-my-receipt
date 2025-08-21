@@ -47,4 +47,9 @@ class ExpenseResource extends Resource
             'edit' => EditExpense::route('/{record}/edit'),
         ];
     }
+
+    public function getEloquenQuery()
+    {
+        return parent::getEloquentQuery()->withCount('items');
+    }
 }

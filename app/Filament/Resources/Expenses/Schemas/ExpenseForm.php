@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Expenses\Schemas;
 
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class ExpenseForm
@@ -10,7 +12,17 @@ class ExpenseForm
     {
         return $schema
             ->components([
-                //
+                TextInput::make("title")
+                    ->label("Judul")
+                    ->required(),
+                FileUpload::make("receipt_image")
+                    ->image()
+                    ->directory("receipt")
+                    ->openable()
+                    ->downloadable()
+                    ->preserveFilenames()
+                    ->label("Foto Struk")
+                    ->required(),
             ]);
     }
 }

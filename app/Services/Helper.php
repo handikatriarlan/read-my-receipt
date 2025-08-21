@@ -26,4 +26,34 @@ class Helper
             return null;
         }
     }
+
+    public function extarctSpecialFieldsAndCleanItems(array $items)
+    {
+        $unwantedNames = ['subtotal', 'total', 'vat', 'kembalian'];
+
+        $cleanedItems = [];
+        $extractedFields = [];
+
+        foreach ($items as $item) {
+            if (!isset($item['name'])) {
+                continue;
+            }
+
+            $name = strtolower($item['name']);
+
+            if (in_array($name, $unwantedNames, true)) {
+                $column = $name;
+
+                $value = $item['Subtotal'] ?? $item['Price'] ?? null;
+                $extractedFields[$column] = $value;
+            } else {
+                $cleanedItems[] = $item;
+            }
+        }
+
+        return [
+            'cleanedItems' => $cleanedItems,
+            'extractedFields' => $extractedFields,
+        ]
+    }
 }

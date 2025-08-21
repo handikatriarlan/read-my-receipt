@@ -17,6 +17,7 @@ class ExpenseForm
                     ->required(),
                 FileUpload::make("receipt_image")
                     ->image()
+                    ->disk('public')
                     ->directory("receipt")
                     ->openable()
                     ->downloadable()

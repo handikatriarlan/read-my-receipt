@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Expenses\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -35,6 +36,18 @@ class ExpensesTable
                 //
             ])
             ->recordActions([
+                Action::make('Lihat Items')
+                    ->icon('heroicon-o-eye')
+                    ->modalHeading('Detail Items')
+                    ->modalSubmitAction(false)
+                    ->color('info')
+                    ->modalCancelActionLabel('Tutup')
+                    ->action(fn() => null)
+                    ->modalContent(function ($record) {
+                        return view('filament.components.items-list', [
+                            'items' => $record->items
+                        ]);
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -1,61 +1,230 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Read My Receipt 📄🔍
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based receipt OCR (Optical Character Recognition) application that automatically extracts and parses receipt information using advanced AI technology.
 
-## About Laravel
+[![PHP Version](https://img.shields.io/badge/PHP-8.2+-blue.svg)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
+[![Filament](https://img.shields.io/badge/Filament-4.x-yellow.svg)](https://filamentphp.com)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 📸 **Image Upload**: Upload receipt images in various formats
+- 🔍 **OCR Processing**: Extract text from receipt images using Tesseract OCR
+- 🤖 **AI-Powered Parsing**: Parse extracted text into structured data using Cohere AI
+- 💰 **Expense Management**: Organize and manage expense records
+- 🗂️ **Item Tracking**: Detailed breakdown of receipt items with quantities and prices
+- 🎨 **Modern Admin Panel**: Built with Filament for a beautiful and intuitive interface
+- 📊 **Data Analytics**: Track and analyze your spending patterns
+- 🌍 **Multi-language OCR**: Support for Indonesian and English text recognition
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tech Stack
 
-## Learning Laravel
+- **Backend**: Laravel 12.x (PHP 8.2+)
+- **Admin Panel**: Filament 4.x
+- **OCR Engine**: Tesseract OCR via `thiagoalessio/tesseract_ocr`
+- **AI Integration**: Cohere AI for text parsing and structuring
+- **Frontend**: Tailwind CSS with Vite
+- **Database**: MySQL/PostgreSQL (configurable)
+- **Queue System**: Laravel Queues for background processing
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🏗️ Architecture
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+The application follows a clean architecture pattern with the following key components:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **OCR Service** (`app/Services/OCRService.php`): Handles image-to-text extraction
+- **AI Parser Service** (`app/Services/AIParserService.php`): Processes extracted text with Cohere AI
+- **AI Parser Job** (`app/Jobs/AIParserJob.php`): Queued job for background AI processing
+- **Models**: `Expense` and `ExpenseItem` for data persistence
+- **Filament Resources**: Admin panel for expense management
 
-## Laravel Sponsors
+## 🚀 Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Prerequisites
 
-### Premium Partners
+- PHP 8.2 or higher
+- Composer
+- Node.js & npm
+- Tesseract OCR installed on your system
+- Cohere AI API key
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Step 1: Install Tesseract OCR
 
-## Contributing
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install tesseract-ocr tesseract-ocr-ind tesseract-ocr-eng
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**macOS:**
+```bash
+brew install tesseract tesseract-lang
+```
 
-## Code of Conduct
+**Windows:**
+Download and install from [GitHub Tesseract releases](https://github.com/UB-Mannheim/tesseract/wiki)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Step 2: Clone and Setup
 
-## Security Vulnerabilities
+```bash
+# Clone the repository
+git clone https://github.com/handikatriarlan/read-my-receipt.git
+cd read-my-receipt
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Install PHP dependencies
+composer install
 
-## License
+# Install Node.js dependencies
+npm install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Create environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+### Step 3: Configure Environment
+
+Edit your `.env` file with the following configurations:
+
+```env
+# Database Configuration
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=read_my_receipt
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+# Cohere AI Configuration
+COHERE_API_KEY=your_cohere_api_key_here
+
+# Queue Configuration (for background processing)
+QUEUE_CONNECTION=database
+
+# File Storage
+FILESYSTEM_DISK=local
+```
+
+### Step 4: Database Setup
+
+```bash
+# Run database migrations
+php artisan migrate
+
+# (Optional) Seed the database
+php artisan db:seed
+```
+
+### Step 5: Build Assets
+
+```bash
+# Build frontend assets
+npm run build
+
+# Or for development with hot reload
+npm run dev
+```
+
+### Step 6: Create Admin User
+
+```bash
+# Create a Filament admin user
+php artisan make:filament-user
+```
+
+## 🎯 Usage
+
+### Starting the Application
+
+1. **Start the Laravel development server:**
+   ```bash
+   php artisan serve
+   ```
+
+2. **Start the queue worker** (for background AI processing):
+   ```bash
+   php artisan queue:work
+   ```
+
+3. **Access the admin panel:**
+   Navigate to `http://localhost:8000/admin` and login with your admin credentials.
+
+### Processing Receipts
+
+1. **Upload Receipt**: Click "New Expense" in the admin panel
+2. **Add Details**: Fill in the title and upload your receipt image
+3. **Automatic Processing**: The system will automatically:
+   - Extract text using OCR
+   - Parse the data with Cohere AI
+   - Structure the information into expense items
+4. **Review & Edit**: Verify and adjust the extracted data as needed
+
+## 📁 Project Structure
+
+```
+app/
+├── Filament/                    # Filament admin panel resources
+│   └── Resources/
+│       └── Expenses/
+├── Http/Controllers/            # HTTP controllers
+├── Jobs/
+│   └── AIParserJob.php         # Background AI processing job
+├── Models/
+│   ├── Expense.php             # Main expense model
+│   ├── ExpenseItem.php         # Individual receipt items
+│   └── User.php                # User authentication
+└── Services/
+    ├── AIParserService.php     # Cohere AI integration
+    ├── OCRService.php          # Tesseract OCR service
+    └── Helper.php              # Utility functions
+```
+
+## 🔧 Configuration
+
+### OCR Configuration
+
+The OCR service supports multiple languages. You can modify the language settings in `app/Services/OCRService.php`:
+
+```php
+return (new TesseractOCR($path)
+    ->lang('ind+eng')  // Indonesian + English
+    ->run()
+);
+```
+
+### AI Parser Customization
+
+Customize the AI parsing prompts in `app/Services/AIParserService.php` to match your specific receipt formats and requirements.
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📋 Requirements
+
+- PHP ^8.2
+- Laravel ^12.0
+- Filament ^4.0
+- Tesseract OCR
+- Cohere AI API access
+
+## 🔒 Security
+
+If you discover any security vulnerabilities, please email the maintainers directly rather than creating a public issue.
+
+## 🙏 Acknowledgments
+
+- [Laravel Framework](https://laravel.com) - The web framework
+- [Filament](https://filamentphp.com) - Admin panel framework
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) - OCR engine
+- [Cohere AI](https://cohere.ai) - AI text processing
+- [thiagoalessio/tesseract_ocr](https://github.com/thiagoalessio/tesseract_ocr) - PHP Tesseract wrapper
+

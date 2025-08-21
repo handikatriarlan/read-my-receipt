@@ -54,6 +54,6 @@ class Helper
         return [
             'cleanedItems' => $cleanedItems,
             'extractedFields' => $extractedFields,
-        ]
+        ];
     }
 }

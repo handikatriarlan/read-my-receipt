@@ -11,6 +11,11 @@ class CreateExpense extends CreateRecord
 {
     protected static string $resource = ExpenseResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function afterCreate()
     {
         try {
